@@ -17,6 +17,16 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        fun onDigit(view: View) {
+
+            tvInput.append((view as Button).text)
+
+        }
+
+        fun onClear(view: View) {
+            tvInput.text = ""
+         }
+
     }
 
 
