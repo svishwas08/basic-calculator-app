@@ -40,6 +40,39 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    fun onEqual(view: View) {
+        if (lastNumeric) {
+            var value = tvInput.text.toString()
+            var prefix = ""
+            try {
+
+                if (value.startsWith("-")) {
+                    prefix = "-"
+                    value = value.substring(1);
+                }
+
+                if (value.contains("-")) {
+                    val splitedValue = value.split("-")
+
+                    var one = splitedValue[0]
+                    val two = splitedValue[1]
+
+
+
+                    if (!prefix.isEmpty()) {
+                        one = prefix + one
+                    }
+
+                    tvInput.text = ((one.toDouble() - two.toDouble()).toString())
+                }
+            }
+                catch(e: ArithmeticException) {
+                    e.printStackTrace()
+                }
+        }
+    }
+
+
     fun onDecimalPoint(view: View) {
 
         if (lastNumeric && !lastDot) {
@@ -54,15 +87,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun isOperatorAdded(value: String): Boolean {
+private fun isOperatorAdded(value: String): Boolean {
 
 
-        return if (value.startsWith("-")) {
-            false
-        } else {
-            (value.contains("/")
-                    || value.contains("*")
-                    || value.contains("-")
-                    || value.contains("+"))
-        }
+    return if (value.startsWith("-")) {
+        false
+    } else {
+        (value.contains("/")
+                || value.contains("*")
+                || value.contains("-")
+                || value.contains("+"))
     }
+}
