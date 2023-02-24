@@ -53,18 +53,45 @@ class MainActivity : AppCompatActivity() {
 
                 if (value.contains("-")) {
                     val splitedValue = value.split("-")
-
                     var one = splitedValue[0]
                     val two = splitedValue[1]
-
-
-
                     if (!prefix.isEmpty()) {
                         one = prefix + one
                     }
 
-                    tvInput.text = ((one.toDouble() - two.toDouble()).toString())
+                    tvInput.text = removeZeroAfterDot((one.toDouble() - two.toDouble()).toString())
                 }
+                else if (value.contains("+")) {
+                        val splitedValue = value.split("+")
+                        var one = splitedValue[0]
+                        val two = splitedValue[1]
+                        if (!prefix.isEmpty()) {
+                            one = prefix + one
+                        }
+
+                        tvInput.text = removeZeroAfterDot((one.toDouble() + two.toDouble()).toString())
+                    }
+                else if (value.contains("*")) {
+                            val splitedValue = value.split("*")
+                            var one = splitedValue[0]
+                            val two = splitedValue[1]
+                            if (!prefix.isEmpty()) {
+                                one = prefix + one
+                            }
+
+                            tvInput.text = removeZeroAfterDot((one.toDouble() * two.toDouble()).toString())
+                        }
+                else if (value.contains("/")) {
+                                val splitedValue = value.split("/")
+                                var one = splitedValue[0]
+                                val two = splitedValue[1]
+                                if (!prefix.isEmpty()) {
+                                    one = prefix + one
+                                }
+
+                                tvInput.text = removeZeroAfterDot((one.toDouble() / two.toDouble()).toString())
+                            }
+
             }
                 catch(e: ArithmeticException) {
                     e.printStackTrace()
@@ -98,4 +125,14 @@ private fun isOperatorAdded(value: String): Boolean {
                 || value.contains("-")
                 || value.contains("+"))
     }
+}
+private fun removeZeroAfterDot(result: String): String {
+
+    var value = result
+
+    if (result.contains(".0")) {
+        value = result.substring(0, result.length - 2)
+    }
+
+    return value
 }
